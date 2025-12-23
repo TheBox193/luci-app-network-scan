@@ -1,0 +1,28 @@
+# OpenWrt SDK/build outputs
+bin/
+build_dir/
+dl/
+feeds/
+sdk/
+staging_dir/
+tmp/
+logs/
+
+# OpenWrt configs
+.config
+.config.old
+.config.*
+
+# Packages/artifacts
+*.ipk
+*.apk
+*.o
+*.tmp
+*.log
+*.swp
+*.swo
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
