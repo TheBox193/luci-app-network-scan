@@ -3,7 +3,7 @@
 local jsonc = require "luci.jsonc"
 local nixio_fs = require "nixio.fs"
 
-local state_root = arg[1] or "/tmp/netdiscover"
+local state_root = arg[1] or "/tmp/network-scan"
 local raw_root = state_root .. "/raw"
 local output_path = state_root .. "/results.json"
 local meta_path = state_root .. "/scan_meta.json"

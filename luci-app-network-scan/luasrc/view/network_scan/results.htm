@@ -1,54 +1,54 @@
 <%+header%>
 
 <div class="cbi-section">
-  <h2>Network Discovery</h2>
+  <h2>Network Scan</h2>
   <div class="cbi-section-node" style="margin-bottom: 12px;">
-    <button id="netdiscover-scan" class="cbi-button cbi-button-action">Scan now</button>
-    <span id="netdiscover-status" style="margin-left: 12px;"></span>
+    <button id="network-scan-scan" class="cbi-button cbi-button-action">Scan now</button>
+    <span id="network-scan-status" style="margin-left: 12px;"></span>
   </div>
   <div class="cbi-section-node" style="margin-bottom: 12px;">
     <label style="margin-right: 16px;">
-      <input type="checkbox" id="netdiscover-arp-scan" checked />
+      <input type="checkbox" id="network-scan-arp-scan" checked />
       ARP scan (if installed)
     </label>
     <label style="margin-right: 16px;">
-      <input type="checkbox" id="netdiscover-icmp-sweep" />
+      <input type="checkbox" id="network-scan-icmp-sweep" />
       ICMP sweep (nmap -sn)
     </label>
     <label style="margin-right: 16px;">
-      <input type="checkbox" id="netdiscover-tcp-probe" />
+      <input type="checkbox" id="network-scan-tcp-probe" />
       TCP probe (nmap open ports)
     </label>
     <label>
       Ports:
-      <input type="text" id="netdiscover-tcp-ports" value="22,80,443,23" style="width: 140px;" />
+      <input type="text" id="network-scan-tcp-ports" value="22,80,443,23" style="width: 140px;" />
     </label>
   </div>
   <div class="cbi-section-node" style="margin-bottom: 12px;">
     <label style="margin-right: 12px;">
       Scope:
-      <select id="netdiscover-scope">
+      <select id="network-scan-scope">
         <option value="auto">LAN subnets (auto)</option>
         <option value="custom">Custom</option>
       </select>
     </label>
     <label>
       Targets:
-      <input type="text" id="netdiscover-scope-targets" value="" placeholder="192.168.1.0/24" style="width: 260px;" />
+      <input type="text" id="network-scan-scope-targets" value="" placeholder="192.168.1.0/24" style="width: 260px;" />
     </label>
   </div>
   <div class="cbi-section-node" style="margin-bottom: 12px;">
     <label style="margin-right: 16px;">
-      <input type="checkbox" id="netdiscover-hide-ipv6-linklocal" checked />
+      <input type="checkbox" id="network-scan-hide-ipv6-linklocal" checked />
       Hide IPv6 link-local
     </label>
     <label>
-      <input type="checkbox" id="netdiscover-hide-ipv4-linklocal" checked />
+      <input type="checkbox" id="network-scan-hide-ipv4-linklocal" checked />
       Hide IPv4 link-local
     </label>
   </div>
   <div class="cbi-section-node" style="margin-bottom: 12px;">
-    <div id="netdiscover-tabbar">
+    <div id="network-scan-tabbar">
       <button class="cbi-button" data-tab="summary">Summary</button>
       <button class="cbi-button" data-tab="scope">Scope</button>
       <button class="cbi-button" data-tab="arp">ARP & Neighbors</button>
@@ -61,10 +61,10 @@
     </div>
   </div>
 
-  <div id="netdiscover-tab-summary" class="netdiscover-tab">
-    <div id="netdiscover-meta" style="margin-bottom: 12px; color: #555;"></div>
+  <div id="network-scan-tab-summary" class="network-scan-tab">
+    <div id="network-scan-meta" style="margin-bottom: 12px; color: #555;"></div>
 
-    <table class="table" id="netdiscover-table">
+    <table class="table" id="network-scan-table">
       <thead>
         <tr class="tr table-titles">
           <th class="th">MAC</th>
@@ -82,7 +82,7 @@
           <th class="th">Actions</th>
         </tr>
       </thead>
-      <tbody id="netdiscover-body">
+      <tbody id="network-scan-body">
         <tr class="tr">
           <td class="td" colspan="13">No scan results yet.</td>
         </tr>
@@ -90,76 +90,76 @@
     </table>
   </div>
 
-  <div id="netdiscover-tab-scope" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-scope" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-scope">Loading…</pre>
+      <pre id="network-scan-evidence-scope">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-arp" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-arp" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-arp">Loading…</pre>
+      <pre id="network-scan-evidence-arp">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-dhcp" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-dhcp" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-dhcp">Loading…</pre>
+      <pre id="network-scan-evidence-dhcp">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-wifi" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-wifi" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-wifi">Loading…</pre>
+      <pre id="network-scan-evidence-wifi">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-nmap-ping" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-nmap-ping" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-nmap-ping">Loading…</pre>
+      <pre id="network-scan-evidence-nmap-ping">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-nmap-ports" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-nmap-ports" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-nmap-ports">Loading…</pre>
+      <pre id="network-scan-evidence-nmap-ports">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-host-hints" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-host-hints" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-host-hints">Loading…</pre>
+      <pre id="network-scan-evidence-host-hints">Loading…</pre>
     </div>
   </div>
 
-  <div id="netdiscover-tab-interfaces" class="netdiscover-tab" style="display: none;">
+  <div id="network-scan-tab-interfaces" class="network-scan-tab" style="display: none;">
     <div class="cbi-section-node">
-      <pre id="netdiscover-evidence-interfaces">Loading…</pre>
+      <pre id="network-scan-evidence-interfaces">Loading…</pre>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
 (function() {
-  var statusUrl = '<%=luci.dispatcher.build_url("admin", "network", "netdiscover", "status")%>';
-  var scanUrl = '<%=luci.dispatcher.build_url("admin", "network", "netdiscover", "scan")%>';
-  var resultsUrl = '<%=luci.dispatcher.build_url("admin", "network", "netdiscover", "results")%>';
-  var rawUrlBase = '<%=luci.dispatcher.build_url("admin", "network", "netdiscover", "raw")%>';
+  var statusUrl = '<%=luci.dispatcher.build_url("admin", "network", "network-scan", "status")%>';
+  var scanUrl = '<%=luci.dispatcher.build_url("admin", "network", "network-scan", "scan")%>';
+  var resultsUrl = '<%=luci.dispatcher.build_url("admin", "network", "network-scan", "results")%>';
+  var rawUrlBase = '<%=luci.dispatcher.build_url("admin", "network", "network-scan", "raw")%>';
 
-  var scanButton = document.getElementById("netdiscover-scan");
-  var statusNode = document.getElementById("netdiscover-status");
-  var metaNode = document.getElementById("netdiscover-meta");
-  var tableBody = document.getElementById("netdiscover-body");
-  var arpScanToggle = document.getElementById("netdiscover-arp-scan");
-  var icmpSweepToggle = document.getElementById("netdiscover-icmp-sweep");
-  var tcpProbeToggle = document.getElementById("netdiscover-tcp-probe");
-  var tcpPortsInput = document.getElementById("netdiscover-tcp-ports");
-  var scopeSelect = document.getElementById("netdiscover-scope");
-  var scopeTargetsInput = document.getElementById("netdiscover-scope-targets");
-  var hideIpv6LinkLocalToggle = document.getElementById("netdiscover-hide-ipv6-linklocal");
-  var hideIpv4LinkLocalToggle = document.getElementById("netdiscover-hide-ipv4-linklocal");
-  var tabButtons = document.querySelectorAll("#netdiscover-tabbar button[data-tab]");
-  var tabSections = document.querySelectorAll(".netdiscover-tab");
+  var scanButton = document.getElementById("network-scan-scan");
+  var statusNode = document.getElementById("network-scan-status");
+  var metaNode = document.getElementById("network-scan-meta");
+  var tableBody = document.getElementById("network-scan-body");
+  var arpScanToggle = document.getElementById("network-scan-arp-scan");
+  var icmpSweepToggle = document.getElementById("network-scan-icmp-sweep");
+  var tcpProbeToggle = document.getElementById("network-scan-tcp-probe");
+  var tcpPortsInput = document.getElementById("network-scan-tcp-ports");
+  var scopeSelect = document.getElementById("network-scan-scope");
+  var scopeTargetsInput = document.getElementById("network-scan-scope-targets");
+  var hideIpv6LinkLocalToggle = document.getElementById("network-scan-hide-ipv6-linklocal");
+  var hideIpv4LinkLocalToggle = document.getElementById("network-scan-hide-ipv4-linklocal");
+  var tabButtons = document.querySelectorAll("#network-scan-tabbar button[data-tab]");
+  var tabSections = document.querySelectorAll(".network-scan-tab");
 
   var pollingTimer = null;
   var lastResults = null;
@@ -372,7 +372,7 @@
       }
     });
 
-    var activeSection = document.getElementById("netdiscover-tab-" + tabId);
+    var activeSection = document.getElementById("network-scan-tab-" + tabId);
     if (activeSection) {
       activeSection.style.display = "block";
     }
@@ -425,7 +425,7 @@
   };
 
   function loadEvidenceTab(tabId) {
-    var container = document.getElementById("netdiscover-tab-" + tabId);
+    var container = document.getElementById("network-scan-tab-" + tabId);
     var sources = evidenceSources[tabId];
     if (!container || !sources) {
       return;

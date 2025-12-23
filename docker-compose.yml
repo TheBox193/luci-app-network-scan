@@ -1,12 +1,12 @@
 services:
-  netdiscover-bootstrap:
+  network-scan-bootstrap:
     image: openwrt/sdk:ipq806x-chromium-24.10.5
     working_dir: /builder
     user: buildbot
     volumes:
       - ./feeds.conf:/builder/feeds.conf:ro
       - ./feeds:/builder/feeds
-      - ./luci-app-netdiscover:/builder/package/luci-app-netdiscover
+      - ./luci-app-network-scan:/builder/package/luci-app-network-scan
       - ./dl:/builder/dl
     command: >
       /bin/sh -lc '
@@ -24,19 +24,19 @@ services:
         make defconfig
       '
 
-  netdiscover-build:
+  network-scan-build:
     image: openwrt/sdk:ipq806x-chromium-24.10.5
     working_dir: /builder
     user: buildbot
     volumes:
       - ./feeds.conf:/builder/feeds.conf:ro
       - ./feeds:/builder/feeds
-      - ./luci-app-netdiscover:/builder/package/luci-app-netdiscover
+      - ./luci-app-network-scan:/builder/package/luci-app-network-scan
       - ./bin:/builder/bin
       - ./dl:/builder/dl
     command: >
       /bin/sh -lc '
         export TERM=xterm
         make package/lua/compile -j1 V=sc
-        make package/luci-app-netdiscover/clean package/luci-app-netdiscover/compile -j1 V=sc
+        make package/luci-app-network-scan/clean package/luci-app-network-scan/compile -j1 V=sc
       '

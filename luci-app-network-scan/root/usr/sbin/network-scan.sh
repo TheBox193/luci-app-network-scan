@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-state_root="/tmp/netdiscover"
+state_root="/tmp/network-scan"
 raw_root="$state_root/raw"
 lock_file="$state_root/scan.lock"
 meta_file="$state_root/scan_meta.json"
@@ -222,8 +222,8 @@ printf '{"scan_started":"%s","scan_finished":"%s","scan_duration_seconds":%s,"sc
   "$scope_targets_raw" \
   > "$meta_file"
 
-if [ -x "/usr/sbin/netdiscover-correlate.lua" ]; then
-  /usr/sbin/netdiscover-correlate.lua "$state_root" >/dev/null 2>&1 || true
+if [ -x "/usr/sbin/network-scan-correlate.lua" ]; then
+  /usr/sbin/network-scan-correlate.lua "$state_root" >/dev/null 2>&1 || true
 fi
 
 printf '{"status":"complete","scan_started":"%s","scan_finished":"%s"}\n' "$scan_start_iso" "$scan_end_iso" > "$status_file"

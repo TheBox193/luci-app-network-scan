@@ -1,4 +1,4 @@
-module("luci.controller.netdiscover", package.seeall)
+module("luci.controller.network_scan", package.seeall)
 
 local function read_json_file(file_path)
   local jsonc = require "luci.jsonc"
@@ -82,16 +82,16 @@ local function read_directory_matches(directory_path, file_pattern)
 end
 
 function index()
-  entry({ "admin", "network", "netdiscover" }, call("action_index"), _("Network Discovery"), 60).dependent = false
-  entry({ "admin", "network", "netdiscover", "scan" }, call("action_scan")).leaf = true
-  entry({ "admin", "network", "netdiscover", "status" }, call("action_status")).leaf = true
-  entry({ "admin", "network", "netdiscover", "results" }, call("action_results")).leaf = true
-  entry({ "admin", "network", "netdiscover", "raw" }, call("action_raw")).leaf = true
+  entry({ "admin", "network", "network-scan" }, call("action_index"), _("Network Scan"), 60).dependent = false
+  entry({ "admin", "network", "network-scan", "scan" }, call("action_scan")).leaf = true
+  entry({ "admin", "network", "network-scan", "status" }, call("action_status")).leaf = true
+  entry({ "admin", "network", "network-scan", "results" }, call("action_results")).leaf = true
+  entry({ "admin", "network", "network-scan", "raw" }, call("action_raw")).leaf = true
 end
 
 function action_index()
   local template = require "luci.template"
-  template.render("netdiscover/results")
+  template.render("network_scan/results")
 end
 
 function action_scan()
@@ -146,7 +146,7 @@ function action_scan()
     arguments[#arguments + 1] = "--scope-targets=" .. sanitized_scope_targets
   end
 
-  local command = "/usr/sbin/netdiscover-scan.sh " .. table.concat(arguments, " ") .. " >/dev/null 2>&1 &"
+  local command = "/usr/sbin/network-scan.sh " .. table.concat(arguments, " ") .. " >/dev/null 2>&1 &"
   sys.call(command)
 
   write_json({
@@ -163,7 +163,7 @@ function action_scan()
 end
 
 function action_status()
-  local state_root = "/tmp/netdiscover"
+  local state_root = "/tmp/network-scan"
   local status = read_json_file(state_root .. "/status.json") or { status = "idle" }
   local meta = read_json_file(state_root .. "/scan_meta.json") or {}
 
@@ -175,7 +175,7 @@ function action_status()
 end
 
 function action_results()
-  local results = read_json_file("/tmp/netdiscover/results.json")
+  local results = read_json_file("/tmp/network-scan/results.json")
   if type(results) ~= "table" then
     results = { meta = {}, devices = {} }
   end
@@ -185,7 +185,7 @@ end
 
 function action_raw()
   local http = require "luci.http"
-  local raw_root = "/tmp/netdiscover/raw"
+  local raw_root = "/tmp/network-scan/raw"
   local source_key = http.formvalue("source") or ""
   local content = nil
 
